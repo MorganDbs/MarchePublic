@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 S'inscrire
+  form.form-horizontal(id='signup-form', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group
+      label.col-sm-3.control-label(for='email') Email
+      .col-sm-7
+        input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
+    .form-group
+      label.col-sm-3.control-label(for='name') Nom
+      .col-sm-7
+        input.form-control(type='text', name='name', id='name', placeholder='Nom', required)
+    .form-group
+      label.col-sm-3.control-label(for='password') Mot de passe
+      .col-sm-7
+        input.form-control(type='password', name='password', id='password', placeholder='Mot de passe', required)
+    .form-group
+      label.col-sm-3.control-label(for='confirmPassword') Confirmer mot de passe
+      .col-sm-7
+        input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirmer mot de passe', required)
+    .form-group
+      label.col-sm-3.control-label(for='statut') Statut
+      .col-sm-7
+        select(class='form-control', name="statut", required)
+                        option(selected='true', value="") Choisir un type
+                        option Demandeur
+                        option Entreprise
+    .form-group
+      .col-sm-offset-3.col-sm-7
+        button.btn.btn-success(type='submit')
+          i.fa.fa-user-plus
+          | S'inscrire

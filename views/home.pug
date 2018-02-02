@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    style.
+        .jumbotron{
+            background: url('/img/ban.jpg') no-repeat center center;
+            background-size: 100% auto;
+            height: 500px;
+            border-radius: 0!important;
+        }
+
+    h1 Marché public
+    p.lead Repondre ou faire un appel d'offre
+    hr
+
+    .jumbotron.jumbotron-fluid
+
+    .col-sm-offset-3.col-sm-5
+      a(href="/ajouterOffre", class='btn btn-primary btn-block') Ajouter une offre
+      br
+      br
+      a(href="/listeOffres", class='btn btn-primary btn-block') Liste des offres

@@ -1,0 +1,60 @@
+extends layout
+
+block content
+    .page-header
+        h3 Appel Offre
+    .row
+        .col-sm-12
+            form.form-horizontal(action="/ajouterOffre/add", method='POST')
+                input(type='hidden', name='_csrf', value=_csrf)
+                .form-group
+                    label Titre
+                    input(class='form-control', placeholder='Titre', name="titre", required)
+                .form-group
+                    label Type
+                    select(class='form-control', name="type", required)
+                        option(selected='true', value="") Choisir un type
+                        option Reparation
+                        option Renovation
+                        option Construction
+                        option Maintenance
+                .form-group
+                    label Adresse
+                    input(class='form-control', placeholder='Adresse', name="adresse", required, id="adresse")
+                .form-group
+                    label Date
+                    input(class='form-control', type="date", require, name="date", id="date")
+                .form-group
+                    label Description
+                    textarea(class='form-control', rows="5", name="description", required)
+                    br
+                    button(type='submit', class='btn btn-primary') Ajouter
+
+
+    script.
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+
+        if(dd<10) {
+            dd = '0'+dd
+        }
+
+        if(mm<10) {
+            mm = '0'+mm
+        }
+
+        today = yyyy+'-'+mm+'-'+dd;
+        document.getElementById('date').value = today;
+
+    script(src='https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDID5uSKinSpuwtZAWRcu5Fz6bMjj9yNXA')
+
+    script.
+
+        var input = document.getElementById('adresse');
+        var options = {
+            componentRestrictions: {country: "FR"}
+        };
+
+        autocomplete = new google.maps.places.Autocomplete(input, options);

@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    style.
+        .jumbotron{
+            background: url('/img/details.jpg') no-repeat center center;
+            background-size: 100% auto;
+            height: 500px;
+            border-radius: 0!important;
+        }
+    .row
+        .col-sm-12
+            h2 Details
+            .jumbotron.jumbotron-fluid
+            for offre in offreDetails
+                    h3= offre.titre + ' (' + offre.type + ')'
+                    h4= "Addresse: " + offre.adresse
+                    h3 Description
+                    div= offre.description
+                    h3 Date
+                    div= 'Le ' + offre.date
+                    a(class="btn btn-primary") Postuler
+

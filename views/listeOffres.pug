@@ -1,0 +1,31 @@
+extends layout
+
+block content
+    style.
+        .imgtqt{
+            width: 250px;
+            height: auto;
+        }
+        .col-sm-4{
+            margin-top: 30px;
+        }
+    .row
+        .col-sm-12
+            h2 Liste des offres
+            hr
+            .row
+                for offre in offres
+                    .col-sm-4
+                        img(src='/img/details.jpg' class="imgtqt")
+                        .card-body
+                            h4(class="card-title")=offre.titre
+                            p(class="card-text")= offre.description
+                        .card-footer.text-muted
+                            div= offre.date
+                            a(href="/offre/"+offre._id, class="btn btn-primary") Détails
+
+
+
+
+    script.
+        var offres =!{JSON.stringify(offres)};
