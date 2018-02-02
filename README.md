@@ -2,9 +2,8 @@ Features
 --------
 
 - **Local Authentication** using Email and Password
-- See carpark and bikepark in Nancy in real time
-- See event create by the community
-- Add/Edit/Remove/Comment event
+- Add a public offer
+- See all public offers
 - Create Account
 - Edit Account
 - Delete Account
