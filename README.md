@@ -2,9 +2,8 @@ Features
 --------
 
 - **Local Authentication** using Email and Password
-- See carpark and bikepark in Nancy in real time
-- See event create by the community
-- Add/Edit/Remove/Comment event
+- Add a public offer
+- See all public offers
 - Create Account
 - Edit Account
 - Delete Account
@@ -25,7 +24,7 @@ The easiest way to get started is to clone the repository:
 
 ```bash
 # Get the latest snapshot
-git clone --depth=1 git@github.com:MorganDbs/nancydonnees.git myproject
+git clone --depth=1 git@github.com:MorganDbs/MarchePublic.git myproject
 
 # Change directory
 cd myproject
