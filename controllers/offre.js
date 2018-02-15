@@ -11,27 +11,26 @@ exports.listeOffres = (req, res) => {
     });
 };
 
-/*exports.getEventById = (req, res) => {
-    var id_event = req.params.id;
-    Event.find({ _id: id_event}, function(err, docs_event){
-        res.render('editEvent', {
-            events: docs_event
+exports.getOffreById = (req, res) => {
+    var id_offre = req.params.id;
+    Offre.find({ _id: id_offre}, function(err, docs){
+        res.render('editOffre', {
+            offres: docs
         });
     });
-};*/
+};
 
-/*exports.saveEvent = (req, res) => {
-    var id_event = req.params.id;
-    Event.findById(id_event, function(err, event){
+exports.saveOffre = (req, res) => {
+    var id_offre = req.params.id;
+    Offre.findById(id_offre, function(err, offre){
         var date = req.body.date.split('-')[2] + '/' + req.body.date.split('-')[1] + '/' + req.body.date.split('-')[0];
-        event.titre = req.body.titre;
-        event.type = req.body.type;
-        event.adresse = req.body.adresse;
-        event.date = date;
-        event.date_not_formated = req.body.date;
-        event.time = req.body.time;
-        event.description = req.body.description;
-        event.save((err) => {
+        offre.titre = req.body.titre;
+        offre.type = req.body.type;
+        offre.adresse = req.body.adresse;
+        offre.date = date;
+        offre.date_not_formated = req.body.date;
+        offre.description = req.body.description;
+        offre.save((err) => {
             if (err) {
                 if (err.code === 11000) {
                   req.flash('errors', { msg: "Les informations de l'évenement n'ont pas pu être sauvegardé" });
@@ -43,14 +42,14 @@ exports.listeOffres = (req, res) => {
           res.redirect('/account');
       });
     });
-};*/
+};
 
-/*exports.deleteEvent = (req, res) => {
-    var id_event = req.params.id;
-    Event.remove({ _id: id_event}, function(){
+exports.deleteOffre = (req, res) => {
+    var id_offre = req.params.id;
+    Offre.remove({ _id: id_offre}, function(){
         res.redirect('/account');
     });
-};*/
+};
 
 exports.addOfferForm = (req, res) => {
     res.locals.login = req.isAuthenticated();
@@ -61,9 +60,9 @@ exports.addOfferForm = (req, res) => {
     }
 };
 
-exports.clearDoneOffre = (req, res) => {
+exports.clearDoneEvent = (req, res) => {
     var today = new Date();
-    Offre.remove({date_not_formated: {$lte: today}});
+    Event.remove({date_not_formated: {$lte: today}});
 };
 
 

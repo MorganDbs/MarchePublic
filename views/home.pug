@@ -15,8 +15,13 @@ block content
 
     .jumbotron.jumbotron-fluid
 
-    .col-sm-offset-3.col-sm-5
-      a(href="/ajouterOffre", class='btn btn-primary btn-block') Ajouter une offre
-      br
-      br
-      a(href="/listeOffres", class='btn btn-primary btn-block') Liste des offres
+    if (user.profile.statut === 'Demandeur')
+      .row
+        .col-sm-offset-3.col-sm-3.text-center
+          a(href="/ajouterOffre", class='btn btn-primary center-block', role="button") Ajouter une offre
+        .col-sm-3.text-center
+          a(href="/listeOffres", class='btn btn-primary center-block', role="button") Liste des offres
+    else
+      .row
+        .col-sm-offset-4.col-sm-4.text-center
+          a(href="/listeOffres", class='btn btn-primary center-block', role="button") Liste des offres

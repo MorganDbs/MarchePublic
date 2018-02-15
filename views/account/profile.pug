@@ -2,6 +2,34 @@ extends ../layout
 
 block content
   .page-header
+    if (user.profile.statut === 'Demandeur')
+      h3 Mes offres
+      table.table.table-striped
+          thead
+            tr
+              th
+                a(onclick="orderbyTitre()") Titre
+              th
+                a(onclick="orderbyType()") Type
+              th Adresse
+              th
+                a(onclick="orderbyDate()") Date
+              th
+              th
+            tbody#offre
+              for offre in offres
+                tr
+                  td= offre.titre
+                  td= offre.type
+                  td= offre.adresse
+                  td= offre.date
+                  td
+                    a(href="/offre/edit/"+offre._id,  class="btn btn-link" role="button") Modifier
+                  form(action='/offre/delete/'+offre._id, method='POST', name="delete")
+                    input(type='hidden', name='_csrf', value=_csrf)
+                    td
+                      button.btn.btn.btn-link(type='submit') Supprimer
+
     h3 Informations du compte
 
   form.form-horizontal(action='/account/profile', method='POST')
@@ -14,6 +42,13 @@ block content
       label.col-sm-3.control-label(for='name') Nom
       .col-sm-7
         input.form-control(type='text', name='name', id='name', value=user.profile.name)
+    .form-group
+      label.col-sm-3.control-label(for='statut') Statut
+      .col-sm-7
+        select(class='form-control', name="statut", required)
+                        option(selected='true', value=user.profile.statut)=user.profile.statut
+                        option Demandeur
+                        option Entreprise
     .form-group
       .col-sm-offset-3.col-sm-4
         button.btn.btn.btn-primary(type='submit')
@@ -52,10 +87,10 @@ block content
           | Supprimer
 
   script.
-        var events =!{JSON.stringify(events)};
+        var offres =!{JSON.stringify(offres)};
 
         function orderbyType(){
-            events.sort(function(a, b){
+            offres.sort(function(a, b){
                 var typeA=a.type.toLowerCase(), typeB=b.type.toLowerCase()
                 if (typeA < typeB)
                     return -1
@@ -67,7 +102,7 @@ block content
         }
 
         function orderbyTitre(){
-            events.sort(function(a, b){
+            offres.sort(function(a, b){
                 var titreA=a.titre.toLowerCase(), titreB=b.titre.toLowerCase()
                 if (titreA < titreB)
                     return -1
@@ -79,9 +114,9 @@ block content
         }
 
         function orderbyDate(){
-            events.sort(function(a, b){
-                var dateA=new Date(a.date.split('/')[2],a.date.split('/')[1],a.date.split('/')[0], a.time.split(':')[0], a.time.split(':')[1]);
-                var dateB=new Date(b.date.split('/')[2],b.date.split('/')[1],b.date.split('/')[0], b.time.split(':')[0], b.time.split(':')[1]);
+            offres.sort(function(a, b){
+                var dateA=new Date(a.date.split('/')[2],a.date.split('/')[1],a.date.split('/')[0]);
+                var dateB=new Date(b.date.split('/')[2],b.date.split('/')[1],b.date.split('/')[0]);
                 return dateA-dateB
             })
             displayOrdered();
@@ -89,15 +124,15 @@ block content
 
         function displayOrdered(){
             var html = '';
-            events.forEach(function(event){
+            offres.forEach(function(offre){
                 html += '<tr>'
-                + '<td>' + event.titre + '</td>'
-                + '<td>' + event.type+ '</td>'
-                + '<td>' + event.adresse + '</td>'
-                + '<td>' + event.date + '</td>'
-                + '<td>' + event.time + '</td>'
-                + '<td><a href="/event/' + event._id + '"> <button class="btn btn-primary">Détails</button></a></td>'
+                + '<td>' + offre.titre + '</td>'
+                + '<td>' + offre.type+ '</td>'
+                + '<td>' + offre.adresse + '</td>'
+                + '<td>' + offre.date + '</td>'
+                + '<td><a class="btn btn-link" href="/offre/edit/' + offre._id + '" role="button">Modifier</a></td>'
+                + '<td><form action="/offre/delete/' + offre._id + '" method="POST" name="delete"></form><button class="btn btn btn-link" type="submit">Supprimer</button></td>'
                 + '</tr>';
             })
-            document.getElementById('event').innerHTML = html;
+            document.getElementById('offre').innerHTML = html;
         }

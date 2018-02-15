@@ -32,7 +32,8 @@ dotenv.load({ path: '.env.example' });
  */
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
-const offreController = require('./controllers/offre')
+const offreController = require('./controllers/offre');
+const candidatureController = require('./controllers/candidature')
 /**
  * API keys and Passport configuration.
  */
@@ -113,6 +114,10 @@ app.use((req, res, next) => {
 });
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
 
+setInterval(function(){
+  offreController.clearDoneOffre();
+},86400000);
+
 
 /**
  * Primary app routes.
@@ -122,7 +127,10 @@ app.get('/ajouterOffre', offreController.addOfferForm);
 app.post('/ajouterOffre/add', offreController.addOffre);
 app.get('/listeOffres', offreController.listeOffres);
 app.get('/offre/:id', offreController.getOffreDetails)
-
+app.post('/offre/delete/:id', offreController.deleteOffre);
+app.get('/offre/edit/:id', offreController.getOffreById);
+app.post('/offre/edit/:id', offreController.saveOffre);
+app.post('/postuler', candidatureController.addCandidature);
 
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
