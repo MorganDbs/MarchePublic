@@ -121,14 +121,11 @@ exports.postSignup = (req, res, next) => {
  */
 exports.getAccount = (req, res) => {
   Offre.find({ id_user: req.user._id}, function (err, docs) {
-    Candidature.find({ id_user.[0].id_user: req.user._id}, function (err, docs2) {
       res.render('account/profile', {
         title: 'Account Management',
         offres: docs
-        candidatures: docs2
       });
     })
-  })
 };
 
 /**
