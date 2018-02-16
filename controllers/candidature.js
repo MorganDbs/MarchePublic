@@ -13,8 +13,10 @@ exports.addCandidature = (req, res) => {
                 id_user: docs,
                 id_offre: docs2,
             }).save(Candidature).then(function(){
+                req.flash('success', { msg: "Votre candidature a bien été prise en compte." });
                 res.redirect('/listeOffres');
             });
         });
     });
+
 };
